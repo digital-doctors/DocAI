@@ -1,0 +1,224 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DocAI</title>
+    <link rel="icon" href="medic.jpg">
+    <style>
+        /* CSS styles */
+        html {
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header h3 {
+            margin-top: 5px;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            margin-right: 10px;
+            border-radius: 50%;
+            border: 3px solid #333;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container div {
+            flex: 1;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #000000;
+            color: rgb(255, 250, 250);
+            border: rgb(255, 255, 255);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e4e4e4;
+        }
+
+        .navbar {
+            background: rgb(31, 27, 27); 
+            font-family: calibri;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .navdiv {
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+        }
+
+        .logo a {
+            font-size: 35px; 
+            font-weight: 600; 
+            color: white;
+        }
+
+        li {
+            list-style: none; 
+            display: inline-block;
+        }
+
+        li a {
+            color: white; 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin-right: 25px;
+        }
+
+        .dashboard-btn {
+            background-color: rgb(0, 0, 0); 
+            margin-left: 10px; 
+            border-radius: 10px; 
+            padding: 10px; 
+            width: 95px;
+        }
+
+        .dashboard-btn a {
+            color: rgb(255, 255, 255); 
+            font-weight: bold; 
+            font-size: 15px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo"><a href="home.html">🏠 HOME</a></div>
+            <ul>
+                <li><a href="index.html">Scanner</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="dashboard-btn"><a href="signin.html">Dashboard</a></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <center>
+            <h2>Digital Doctor Health Analysis</h2> 
+            
+            <h3>This web application is a prototype version of our Imagine Cup Junior 2024 submission, DocAI. All these outputs are hardcoded with NO AI integrated, yet. Please note that this is functional, but has no real personalization available yet. </h3>
+            <hr>
+            <h2>To get output from this web-app, please scan your temperature, heart rate, and steps and list them in the appropriate boxes below.</h2>
+            <hr>
+        </center>
+        <br>
+
+        <form>
+            <label for="temperature">Temperature:</label>
+            <input id="temperature" type="number" placeholder="Enter here!">
+            <br>
+            <label for="heartRate">Heart Rate:</label>
+            <input id="heartRate" type="number" placeholder="Enter here">
+            <br>
+            <label for="steps">Steps:</label>
+            <input id="steps" type="number" placeholder="Enter here">
+            <br>
+            <button onclick="buttonClick()" type="button" >Analyze</button>
+        </form>
+    </div>
+
+    <script>
+        function buttonClick() {
+            var temperature = parseFloat(document.getElementById("temperature").value);
+            var heartRate = parseFloat(document.getElementById("heartRate").value);
+            var steps = parseFloat(document.getElementById("steps").value);
+
+            localStorage.setItem("temperature", temperature);
+            localStorage.setItem("heartRate", heartRate);
+            localStorage.setItem("steps", steps);
+
+            if (temperature > 98.6 && heartRate > 100 && steps < 5000) {
+                alert('Hi there! It seems like you\'re not feeling your best. Your temperature is high, heart rate is elevated, and steps are low. Please take some time to rest and stay hydrated.');
+            } else if (temperature > 98.6 && heartRate < 60 && steps < 5000) {
+                alert('Hey! Your temperature is high, but your heart rate is low, and steps are below average. Take care and consider seeking medical advice.');
+            } else if (temperature < 98.6 && heartRate < 60 && steps < 5000) {
+                alert('Hello! Your temperature is normal, but your heart rate is low, and steps are below average. Make sure to stay active and monitor your health.');
+            } else if (temperature < 98.6 && heartRate > 100 && steps < 5000) {
+                alert('Hi there! Your temperature is normal, but your heart rate is high, and steps are below average. Consider taking a break and staying hydrated.');
+            } else if (temperature < 98.6 && heartRate < 100 && steps < 5000){
+                alert('Hey! Everything looks okay except your steps are below average. Try to increase your activity level throughout the day.');
+            } else if (temperature > 98.6 && heartRate < 100 && steps < 5000) {
+                alert('Hey there! Your temperature is high, but your heart rate and steps are below average. Consider getting some exercise to improve your health.');
+            } else if (temperature > 98.6 && heartRate > 100 && steps > 5000) {
+                alert('Uh oh! Your temperature and heart rate are high, but your steps are good. Take a break and make sure to stay hydrated.');
+            } else if (temperature > 98.6 && heartRate < 60 && steps > 5000) {
+                alert('Hi! Your temperature is high, but your heart rate is low, and steps are good. Take care of yourself and consider seeking medical advice if necessary.');
+            } else if (temperature < 98.6 && heartRate < 60 && steps > 5000) {
+                alert('Hello! Your temperature is normal, but your heart rate is low, and steps are good. Keep up the good work and stay healthy.');
+            } else if (temperature < 98.6 && heartRate > 100 && steps > 5000) {
+                alert('Hello there! Your temperature is normal, but your heart rate is high, and steps are good. Keep it up and stay active.');
+            } else if (temperature < 98.6 && heartRate < 100 && steps > 5000) {
+                alert('Hey! Everything looks good, your temperature is normal, heart rate is average, and steps are good. Keep up the great work!');
+            } else if (temperature > 98.6 && heartRate < 100 && steps > 5000) {
+                alert('Hey there! Your temperature is high, but your heart rate is average, and steps are good. Consider getting some exercise to improve your health.');
+            } else {
+                alert('Please enter valid temperature, heart rate, and steps values.');
+            }
+    }
+
+
+    </script>
+
+</body>
+</html>
